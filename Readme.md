@@ -5,7 +5,7 @@
 ## Installation
 * Make sure you have a working rust installation - run rustc --version to check.
   * If you don't have rust installed, follow the instructions at https://www.rust-lang.org/tools/install to install it (a quick and painless process).
-* Run `pip install https://github.com/KanHarI/kolmogorov-generator` to install the package.
+* Run `pip install git+https://github.com/KanHarI/kolmogorov-generator` to install the package.
 
 ## Usage
 ```python
