@@ -12,10 +12,10 @@
 import kolmogorov_generator as kg
 import os
 
-TAPE_SIZE = 5
+TAPE_SIZE = 64
 GAMMA = 0.6
 MAX_STATES = 16
-MAX_STEPS = 100
+MAX_STEPS = 128
 FILTER_UNIFORM_OUTPUTS = True
 
 seed = os.urandom(32)
@@ -23,7 +23,6 @@ seed = os.urandom(32)
 bitstrings_generator = kg.KolmogorovGen(TAPE_SIZE, GAMMA, MAX_STATES, MAX_STEPS, FILTER_UNIFORM_OUTPUTS, seed)
 random_bitstring = bitstrings_generator.generate()
 print(random_bitstring)
-# array([False, False,  True,  True,  True])
 ```
 
 ## Parameters 
