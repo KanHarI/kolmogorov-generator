@@ -13,9 +13,9 @@ import kolmogorov_generator as kg
 import os
 
 TAPE_SIZE = 64
-GAMMA = 0.6
+GAMMA = 0.8
 MAX_STATES = 16
-MAX_STEPS = 128
+MAX_STEPS = 256
 FILTER_UNIFORM_OUTPUTS = True
 
 seed = os.urandom(32)
@@ -30,9 +30,9 @@ print(random_bitstring)
 | Parameter | Description                                                                                                                                                                                                           | Example          |
 | --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
 | `tape_size` | The size of the tape used by the Turing machine. Defines the size of the output array.                                                                                                                                | `64`             |
-| `gamma` | Decay rate for the number of states in the Turing machine. The theoretical derivation uses 0.5. Choosing higher values makes larger turing machines more likely. Higher values might be useful for some applications. | `0.6`            |
+| `gamma` | Decay rate for the number of states in the Turing machine. The theoretical derivation uses 0.5. Choosing higher values makes larger turing machines more likely. Higher values might be useful for some applications. | `0.8`            |
 | `max_states` | The maximum number of states in the Turing machine.                                                                                                                                                                   | `16`             |
-| `max_steps` | The maximum number of steps the Turing machine can run.                                                                                                                                                               | `128`            |
+| `max_steps` | The maximum number of steps the Turing machine can run. Higher values are needed for higher quality outputs.                                                                                                          | `256`            |
 | `filter_uniform_outputs` | If set to `True`, the generator will filter out bitstrings that are uniform (all 0's or all 1's).                                                                                                                     | `True`           |
 | `seed` | A seed for the random number generator. If not provided, a random seed will be used.                                                                                                                                  | `os.urandom(32)` |
 
