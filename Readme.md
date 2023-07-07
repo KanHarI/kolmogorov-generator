@@ -27,14 +27,14 @@ print(random_bitstring)
 
 ## Parameters 
 
-| Parameter | Description                                                                                                                                          | Example          |
-| --- |------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
-| `tape_size` | The size of the tape used by the Turing machine. Defines the size of the output array.                                                               | `64`             |
-| `gamma` | Decay rate for the number of states in the Turing machine. The theoretical derivation uses 0.5. Higher values might be useful for some applications. | `0.6`            |
-| `max_states` | The maximum number of states in the Turing machine.                                                                                                  | `16`             |
-| `max_steps` | The maximum number of steps the Turing machine can run.                                                                                              | `128`            |
-| `filter_uniform_outputs` | If set to `True`, the generator will filter out bitstrings that are uniform (all 0's or all 1's).                                                    | `True`           |
-| `seed` | A seed for the random number generator. If not provided, a random seed will be used.                                                                 | `os.urandom(32)` |
+| Parameter | Description                                                                                                                                                                                                           | Example          |
+| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
+| `tape_size` | The size of the tape used by the Turing machine. Defines the size of the output array.                                                                                                                                | `64`             |
+| `gamma` | Decay rate for the number of states in the Turing machine. The theoretical derivation uses 0.5. Choosing higher values makes larger turing machines more likely. Higher values might be useful for some applications. | `0.6`            |
+| `max_states` | The maximum number of states in the Turing machine.                                                                                                                                                                   | `16`             |
+| `max_steps` | The maximum number of steps the Turing machine can run.                                                                                                                                                               | `128`            |
+| `filter_uniform_outputs` | If set to `True`, the generator will filter out bitstrings that are uniform (all 0's or all 1's).                                                                                                                     | `True`           |
+| `seed` | A seed for the random number generator. If not provided, a random seed will be used.                                                                                                                                  | `os.urandom(32)` |
 
 ## Output
 The generator returns a numpy array of boolean values representing the generated bitstring.
