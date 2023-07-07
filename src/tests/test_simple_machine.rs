@@ -28,6 +28,7 @@ pub fn test_simple_turing_machine() {
         ],
         4,
         0,
+        false,
     );
     assert_eq!(
         simple_turing_machine.run_machine(100),
