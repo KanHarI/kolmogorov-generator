@@ -58,7 +58,7 @@ impl TuringMachine {
         let mut tape = vec![false; self.tape_size];
         let mut state = 1;
         let mut step = 0;
-        let mut pos = 0;
+        let mut pos = self.tape_size / 2;
         while state != 0 && step < max_steps {
             let transition = &self.transitions[state];
             let tape_val = tape[pos];
