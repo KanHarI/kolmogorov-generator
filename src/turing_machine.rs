@@ -17,17 +17,19 @@ pub struct TuringMachineTransition {
 pub struct TuringMachine {
     // Turing machines always start on state no. 1 and halt when they reach state 0
     tape_size: usize,
+    start_position: usize,
     transitions: Vec<TuringMachineTransition>,
 }
 
 impl TuringMachine {
-    pub fn new(transitions: Vec<TuringMachineTransition>, tape_size: usize) -> Self {
+    pub fn new(transitions: Vec<TuringMachineTransition>, tape_size: usize, start_position: usize) -> Self {
         if tape_size < 2 || transitions.len() < 2 {
             panic!("Turing machine must have at least 2 states and a tape size of at least 2");
         }
         Self {
             tape_size,
             transitions,
+            start_position,
         }
     }
 
@@ -51,14 +53,14 @@ impl TuringMachine {
                 },
             });
         }
-        Self::new(transitions, tape_size)
+        Self::new(transitions, tape_size, rng.gen_range(0..tape_size))
     }
 
     pub fn run_machine(&self, max_steps: usize) -> Vec<bool> {
         let mut tape = vec![false; self.tape_size];
         let mut state = 1;
         let mut step = 0;
-        let mut pos = self.tape_size / 2;
+        let mut pos = self.start_position;
         while state != 0 && step < max_steps {
             let transition = &self.transitions[state];
             let tape_val = tape[pos];
