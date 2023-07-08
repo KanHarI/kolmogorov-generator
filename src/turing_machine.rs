@@ -11,7 +11,8 @@ pub struct TuringMachineTransition {
     pub one_state: usize,
     pub zero_write: bool,
     pub one_write: bool,
-    pub tape_action: TapeAction,
+    pub zero_action: TapeAction,
+    pub one_action: TapeAction,
 }
 
 pub struct TuringMachine {
@@ -48,7 +49,12 @@ impl TuringMachine {
                 one_state: rng.gen_range(0..num_states),
                 zero_write: rng.gen(),
                 one_write: rng.gen(),
-                tape_action: if rng.gen::<bool>() {
+                zero_action: if rng.gen::<bool>() {
+                    TapeAction::MoveLeft
+                } else {
+                    TapeAction::MoveRight
+                },
+                one_action: if rng.gen::<bool>() {
                     TapeAction::MoveLeft
                 } else {
                     TapeAction::MoveRight
@@ -60,10 +66,10 @@ impl TuringMachine {
 
     pub fn run_machine(&self, max_steps: usize) -> Vec<bool> {
         let mut tape = vec![self.initialization_symbol; self.tape_size];
-        let mut state = 1;
+        let mut state = 0;
         let mut step = 0;
         let mut pos = self.start_position;
-        while state != 0 && step < max_steps {
+        while step < max_steps {
             let transition = &self.transitions[state];
             let tape_val = tape[pos];
             state = if tape_val {
@@ -76,7 +82,12 @@ impl TuringMachine {
             } else {
                 transition.zero_write
             };
-            match transition.tape_action {
+            let transition = if tape_val {
+                &transition.one_action
+            } else {
+                &transition.zero_action
+            };
+            match transition {
                 TapeAction::MoveLeft => {
                     if pos == 0 {
                         pos = self.tape_size - 1;
