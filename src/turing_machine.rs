@@ -24,7 +24,12 @@ pub struct TuringMachine {
 }
 
 impl TuringMachine {
-    pub fn new(transitions: Vec<TuringMachineTransition>, tape_size: usize, start_position: usize, initialization_symbol: bool) -> Self {
+    pub fn new(
+        transitions: Vec<TuringMachineTransition>,
+        tape_size: usize,
+        start_position: usize,
+        initialization_symbol: bool,
+    ) -> Self {
         if tape_size < 2 || transitions.len() < 2 {
             panic!("Turing machine must have at least 2 states and a tape size of at least 2");
         }
@@ -61,7 +66,12 @@ impl TuringMachine {
                 },
             });
         }
-        Self::new(transitions, tape_size, rng.gen_range(0..tape_size), rng.gen())
+        Self::new(
+            transitions,
+            tape_size,
+            rng.gen_range(0..tape_size),
+            rng.gen(),
+        )
     }
 
     pub fn run_machine(&self, max_steps: usize) -> Vec<bool> {

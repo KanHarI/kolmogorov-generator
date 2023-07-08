@@ -1,13 +1,14 @@
-use crate::turing_machine::TuringMachine;
+use crate::inner_tape_machine::InnerTapeMachine;
 use numpy::ndarray::Array1;
 use numpy::{IntoPyArray, Ix1, PyArray};
 use pyo3::Python;
-use rand::prelude::{SeedableRng, StdRng};
-use rand::Rng;
+use rand::prelude::StdRng;
+use rand::{Rng, SeedableRng};
 
 #[pyclass]
-pub struct KolmogorovGen {
-    tape_size: usize,
+pub struct KolmogorovInnerStateGen {
+    outer_tape_size: usize,
+    inner_tape_size: usize,
     states_discount_rate: f64,
     max_states: usize,
     max_steps: usize,
@@ -16,10 +17,11 @@ pub struct KolmogorovGen {
 }
 
 #[pymethods]
-impl KolmogorovGen {
+impl KolmogorovInnerStateGen {
     #[new]
     pub fn new(
-        tape_size: usize,
+        outer_tape_size: usize,
+        inner_tape_size: usize,
         states_discount_rate: f64,
         max_states: usize,
         max_steps: usize,
@@ -27,7 +29,8 @@ impl KolmogorovGen {
         seed: Option<[u8; 32]>,
     ) -> Self {
         Self {
-            tape_size,
+            outer_tape_size,
+            inner_tape_size,
             states_discount_rate,
             max_states,
             max_steps,
@@ -46,9 +49,10 @@ impl KolmogorovGen {
             num_states += 1;
         }
         loop {
-            let turing_machine = TuringMachine::create_random_turing_machine(
+            let turing_machine = InnerTapeMachine::create_random_stack_machine(
                 num_states,
-                self.tape_size,
+                self.inner_tape_size,
+                self.outer_tape_size,
                 self.rng.gen(),
             );
             let result = turing_machine.run_machine(self.max_steps);
